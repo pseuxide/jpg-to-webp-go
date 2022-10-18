@@ -13,20 +13,20 @@ import (
 )
 
 func main() {
-	// 画像を読み込み
+	// reading the file
 	fake_kirby, err := os.Open("fake_kirby.jpg")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer fake_kirby.Close()
 
-	// io.Readerからbyteに変換
+	// io.Reader to byte
 	content, _ := ioutil.ReadAll(fake_kirby)
 
-	// base64に変換
+	// into base64
 	encoded := base64.StdEncoding.EncodeToString(content)
 
-	// デコード
+	// decoding
 	by := base64.NewDecoder(base64.StdEncoding, strings.NewReader(encoded))
 
 	imgSrc, _, err := image.Decode(by)
